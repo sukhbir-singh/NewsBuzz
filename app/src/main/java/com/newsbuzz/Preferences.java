@@ -1,10 +1,8 @@
 package com.newsbuzz;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -18,16 +16,15 @@ public class Preferences extends AppCompatActivity {
     SharedPreferences.Editor editor;
     int PRIVATE_MODE = 0;
 
-    private static final String KEY_USER_ID1 = "national";
-    private static final String KEY_USER_ID2 = "international";
-    private static final String KEY_USER_ID3 = "sports";
-    private static final String KEY_USER_ID4 = "entertainment";
-    private static final String KEY_USER_ID5 = "technology";
-    private static final String KEY_USER_ID6 = "local";
+    public static final String KEY_USER_ID1 = "entertainment";
+    public static final String KEY_USER_ID2 = "technology";
+    public static final String KEY_USER_ID3 = "business";
+    public static final String KEY_USER_ID4 = "sports";
+    public static final String KEY_USER_ID5 = "health";
 
-    private static final String PREF_NAME = "newsbuzz";
-    private boolean is_national=false,is_international=false,is_sports=false,is_entertainment=false,is_technology=false,is_local=false;
-    private CheckBox national,international,sports,entertainment,technology,local;
+    public static final String PREF_NAME = "newsbuzz";
+    private boolean is_entertainment=false,is_technology=false,is_business=false,is_sports=false,is_health=false;
+    private CheckBox business,sports,entertainment,technology,health;
 
     private Button next_button;
     @Override
@@ -38,12 +35,11 @@ public class Preferences extends AppCompatActivity {
         pref = getSharedPreferences(PREF_NAME, PRIVATE_MODE);
         editor = pref.edit();
 
-        national= (CheckBox) findViewById(R.id.checkBox1);
-        international= (CheckBox) findViewById(R.id.checkBox2);
-        sports= (CheckBox) findViewById(R.id.checkBox3);
-        entertainment= (CheckBox) findViewById(R.id.checkBox4);
-        technology= (CheckBox) findViewById(R.id.checkBox5);
-        local= (CheckBox) findViewById(R.id.checkBox6);
+        business= (CheckBox) findViewById(R.id.business_checkbox);
+        sports= (CheckBox) findViewById(R.id.sports_checkbox);
+        entertainment= (CheckBox) findViewById(R.id.entertainment_checkbox);
+        technology= (CheckBox) findViewById(R.id.technology_checkbox);
+        health= (CheckBox) findViewById(R.id.health_checkbox);
 
         next_button = (Button) findViewById(R.id.next_button);
         next_button.setOnClickListener(new View.OnClickListener() {
@@ -56,16 +52,10 @@ public class Preferences extends AppCompatActivity {
             }
         });
 
-        national.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        business.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                is_national = isChecked;
-            }
-        });
-        international.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                is_international=isChecked;
+                is_business = isChecked;
             }
         });
         sports.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -86,24 +76,22 @@ public class Preferences extends AppCompatActivity {
                 is_technology = isChecked;
             }
         });
-        local.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        health.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                is_local = isChecked;
+                is_health = isChecked;
             }
         });
     }
 
     public void saveAllPreferences(){
         Log.v("saved","saved");
-     editor.putBoolean(KEY_USER_ID1, is_national);
-     editor.putBoolean(KEY_USER_ID2,is_international);
-     editor.putBoolean(KEY_USER_ID3,is_sports);
-     editor.putBoolean(KEY_USER_ID4,is_entertainment);
-     editor.putBoolean(KEY_USER_ID5,is_technology);
-     editor.putBoolean(KEY_USER_ID6,is_local);
-
-        editor.commit();
+     editor.putBoolean(KEY_USER_ID1, is_entertainment);
+     editor.putBoolean(KEY_USER_ID2, is_technology);
+     editor.putBoolean(KEY_USER_ID3, is_business);
+     editor.putBoolean(KEY_USER_ID4, is_sports);
+     editor.putBoolean(KEY_USER_ID5, is_health);
+     editor.commit();
     }
 
     public void clear() {

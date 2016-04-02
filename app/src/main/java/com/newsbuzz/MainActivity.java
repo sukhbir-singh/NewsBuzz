@@ -1,6 +1,7 @@
 package com.newsbuzz;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private RecyclerView recyclerView;
     private ArrayList<ItemStaggered> list;
     StaggeredGridLayoutManager staggeredGridLayoutManager;
+    private SharedPreferences pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        pref = getSharedPreferences(Preferences.PREF_NAME, 0);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         recyclerView =(RecyclerView)findViewById(R.id.staggered_recycler);
@@ -54,13 +58,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         list=new ArrayList<>();
         list.add(new ItemStaggered("Top Stories",R.drawable.ic_launcher));
-        list.add(new ItemStaggered("Top Stories",R.drawable.ic_launcher));
-        list.add(new ItemStaggered("Top Stories",R.drawable.drawer_new));
-        list.add(new ItemStaggered("Top Stories",R.drawable.ic_launcher));
-        list.add(new ItemStaggered("Top Stories",R.drawable.ic_launcher));
-        list.add(new ItemStaggered("Top Stories",R.drawable.ic_launcher));
-        list.add(new ItemStaggered("Top Stories", R.drawable.ic_launcher));
-        list.add(new ItemStaggered("Top Stories", R.drawable.ic_launcher));
+
+        if(pref.getBoolean(Preferences.KEY_USER_ID1,true)){
+            list.add(new ItemStaggered("Entertainment",R.drawable.ic_launcher));
+        }
+
+        if(pref.getBoolean(Preferences.KEY_USER_ID2,true)){
+            list.add(new ItemStaggered("Technology",R.drawable.drawer_new));
+        }
+
+        if(pref.getBoolean(Preferences.KEY_USER_ID3,true)){
+            list.add(new ItemStaggered("Business",R.drawable.ic_launcher));
+        }
+
+        if(pref.getBoolean(Preferences.KEY_USER_ID4,true)){
+            list.add(new ItemStaggered("Sports",R.drawable.ic_launcher));
+        }
+
+        if(pref.getBoolean(Preferences.KEY_USER_ID5,true)){
+            list.add(new ItemStaggered("Health",R.drawable.drawer_new));
+        }
 
         //recyclerView.setHasFixedSize(true);
 
@@ -72,8 +89,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Intent i=new Intent(MainActivity.this,CategoryActivity.class);
-                i.putExtra(CATEGORY_NAME,list.get(position).getTitle());
+                Intent i = new Intent(MainActivity.this, CategoryActivity.class);
+                i.putExtra(CATEGORY_NAME, list.get(position).getTitle());
                 startActivity(i);
             }
         }));

@@ -4,19 +4,14 @@
     android:layout_height="match_parent">
 
 <LinearLayout
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical" 
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    
         <android.support.v7.widget.CardView
-            android:layout_marginLeft="70dp"
-            android:layout_marginRight="70dp"
-            android:layout_marginBottom="8dp"
             android:layout_alignParentBottom="true"
             xmlns:card_view="http://schemas.android.com/tools"
             card_view:cardCornerRadius="20dp"
-            card_view:cardElevation="8dp"
             card_view:cardUseCompatPadding="true"
             android:layout_marginTop="5dp"
             android:layout_width="match_parent"
@@ -34,13 +29,15 @@
 
         </android.support.v7.widget.CardView>
 
-    </LinearLayout>
-
+    <LinearLayout
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
 
     <android.support.v7.widget.CardView
+        android:layout_marginBottom="5dp"
         android:layout_marginLeft="18dp"
-        android:layout_marginRight="195dp"
-        android:layout_marginBottom="10dp"
         android:layout_alignParentBottom="true"
         xmlns:card_view="http://schemas.android.com/tools"
         card_view:cardCornerRadius="300dp"
@@ -51,103 +48,106 @@
         android:layout_height="wrap_content">
 
     <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="National"
-        android:id="@+id/checkBox1"
         android:layout_gravity="left"
-        android:paddingTop="20dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="15dp"/>
-    </android.support.v7.widget.CardView>
-
-    <android.support.v7.widget.CardView
-        android:layout_marginLeft="198dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginBottom="10dp"
-        android:layout_alignParentBottom="true"
-        xmlns:card_view="http://schemas.android.com/tools"
-        card_view:cardCornerRadius="300dp"
-        card_view:cardElevation="8dp"
-        card_view:cardUseCompatPadding="true"
-        android:layout_marginTop="1dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="International"
-        android:id="@+id/checkBox2"
-        android:layout_gravity="right"
-        android:paddingTop="20dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="15dp"/>
-
-    </android.support.v7.widget.CardView>
-
-    <android.support.v7.widget.CardView
-        android:layout_marginLeft="18dp"
-        android:layout_marginRight="195dp"
-        android:layout_marginBottom="10dp"
-        android:layout_alignParentBottom="true"
-        xmlns:card_view="http://schemas.android.com/tools"
-        card_view:cardCornerRadius="300dp"
-        card_view:cardElevation="8dp"
-        card_view:cardUseCompatPadding="true"
-        android:layout_marginTop="1dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sports"
-        android:id="@+id/checkBox3"
-        android:layout_gravity="left"
-        android:paddingTop="20dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="15dp"/>
-
-    </android.support.v7.widget.CardView>
-
-    <android.support.v7.widget.CardView
-        android:layout_marginLeft="198dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginBottom="10dp"
-        android:layout_alignParentBottom="true"
-        xmlns:card_view="http://schemas.android.com/tools"
-        card_view:cardCornerRadius="300dp"
-        card_view:cardElevation="8dp"
-        card_view:cardUseCompatPadding="true"
-        android:layout_marginTop="1dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Entertainment"
-        android:id="@+id/checkBox4"
-        android:layout_gravity="right"
-        android:paddingTop="20dp"
-        android:paddingLeft="10dp"
+        android:id="@+id/entertainment_checkbox"
+        android:textSize="16sp"
+        android:layout_marginLeft="10dp"
+        android:paddingTop="14dp"
+        android:paddingBottom="14dp"
+        android:checked="false" />
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_marginBottom="5dp"
+        android:layout_alignParentBottom="true"
+        xmlns:card_view="http://schemas.android.com/tools"
+        card_view:cardCornerRadius="300dp"
+        card_view:cardElevation="8dp"
+        card_view:cardUseCompatPadding="true"
+        android:layout_marginTop="1dp"
+        android:layout_marginRight="18dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <CheckBox
         android:paddingRight="10dp"
-        android:paddingBottom="15dp"/>
+        android:layout_marginRight="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Technology"
+        android:id="@+id/technology_checkbox"
+        android:layout_gravity="right"
+        android:textSize="16sp"
+        android:layout_marginLeft="10dp"
+        android:paddingTop="14dp"
+        android:paddingBottom="14dp"
+        android:checked="false" />
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="18dp"
+        android:layout_alignParentBottom="true"
+        xmlns:card_view="http://schemas.android.com/tools"
+        card_view:cardCornerRadius="300dp"
+        card_view:cardElevation="8dp"
+        card_view:cardUseCompatPadding="true"
+        android:layout_marginTop="1dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Business"
+        android:id="@+id/business_checkbox"
+        android:layout_gravity="left"
+        android:textSize="16sp"
+        android:layout_marginLeft="10dp"
+        android:paddingTop="14dp"
+        android:paddingBottom="14dp"
+        android:checked="false" />
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_marginRight="18dp"
+        android:layout_alignParentBottom="true"
+        xmlns:card_view="http://schemas.android.com/tools"
+        card_view:cardCornerRadius="300dp"
+        card_view:cardElevation="8dp"
+        card_view:cardUseCompatPadding="true"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <CheckBox
+        android:paddingRight="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sports"
+        android:id="@+id/sports_checkbox"
+        android:layout_gravity="right"
+        android:textSize="16sp"
+        android:layout_marginLeft="10dp"
+        android:paddingTop="14dp"
+        android:paddingBottom="14dp"
+        android:checked="false" />
 
     </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView
         android:layout_marginLeft="18dp"
-        android:layout_marginRight="195dp"
-        android:layout_marginBottom="10dp"
         android:layout_alignParentBottom="true"
         xmlns:card_view="http://schemas.android.com/tools"
         card_view:cardCornerRadius="300dp"
         card_view:cardElevation="8dp"
+        android:layout_marginBottom="5dp"
         card_view:cardUseCompatPadding="true"
         android:layout_marginTop="1dp"
         android:layout_width="match_parent"
@@ -156,45 +156,25 @@
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Technology"
-        android:id="@+id/checkBox5"
+        android:text="Health"
+        android:id="@+id/health_checkbox"
         android:layout_gravity="left"
-        android:paddingTop="20dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="15dp"/>
+        android:textSize="16sp"
+        android:layout_marginLeft="10dp"
+        android:paddingTop="14dp"
+        android:paddingBottom="14dp"
+        android:checked="false" />
 
     </android.support.v7.widget.CardView>
-
-    <android.support.v7.widget.CardView
-        android:layout_marginLeft="198dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginBottom="10dp"
-        android:layout_alignParentBottom="true"
-        xmlns:card_view="http://schemas.android.com/tools"
-        card_view:cardCornerRadius="300dp"
-        card_view:cardElevation="8dp"
-        card_view:cardUseCompatPadding="true"
-        android:layout_marginTop="1dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Local"
-        android:id="@+id/checkBox6"
-        android:layout_gravity="right"
-        android:paddingTop="20dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingBottom="15dp"/>
-
-    </android.support.v7.widget.CardView>
-
+        
+    </LinearLayout>
 
     <Button
         android:id="@+id/next_button"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:padding="20dp"
+        android:textSize="15sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
