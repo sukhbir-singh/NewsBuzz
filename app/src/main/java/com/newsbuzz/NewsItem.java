@@ -7,6 +7,8 @@ import android.os.Parcelable;
 public class NewsItem implements Parcelable{
     public String title,link_more,pubDate,description,link_image,category,related_link;
 
+    public NewsItem(){}
+
     public NewsItem(String title, String link_more, String pubDate, String description, String link_image,String category,String related_link) {
         this.title = title;
         this.link_more = link_more;
