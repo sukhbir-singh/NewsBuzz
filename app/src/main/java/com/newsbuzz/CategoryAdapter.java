@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -54,6 +55,7 @@ if(!list.get(position).title.isEmpty()&&list.get(position).title.length()!=0){
             super(itemView);
             imageView= (ImageView) itemView.findViewById(R.id.image_item_category);
             textView= (TextView) itemView.findViewById(R.id.title_item_category);
+            imageView.setLayoutParams(new LinearLayout.LayoutParams((int) Utils.convertDpToPixel(100f),(int) Utils.convertDpToPixel(100f)));
         }
     }
 }

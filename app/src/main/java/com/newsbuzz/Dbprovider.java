@@ -10,6 +10,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 public class Dbprovider extends ContentProvider {
     private static final int INSERT_DATA = 1;
@@ -34,10 +35,12 @@ public class Dbprovider extends ContentProvider {
     @Nullable
     @Override
     public Cursor query(Uri uri, String[] strings, String s, String[] strings1, String s1) {
+      sqLiteDatabase=dbhelper.getReadableDatabase();
        Cursor cursor=null;
        if(uriMatcher.match(uri)==READ_DATA){
            cursor=sqLiteDatabase.query(DbContract.TABLE_NEWS,null,null,null,null,null,null,null);
            if(cursor!=null){
+               Log.d("read","read");
                cursor.setNotificationUri(getContext().getContentResolver(),uri);
                return  cursor;
            }
@@ -59,6 +62,7 @@ public class Dbprovider extends ContentProvider {
         if(uriMatcher.match(uri)==INSERT_DATA){
             id = sqLiteDatabase.insert(DbContract.TABLE_NEWS, null, contentValues);
             if (id > 0) {
+                Log.d("insert","insert");
                 Uri _uri = ContentUris.withAppendedId(uri, id);
                 getContext().getContentResolver().notifyChange(_uri, null);
                 return _uri;

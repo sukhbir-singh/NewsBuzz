@@ -43,6 +43,10 @@ public class NewsItem implements Parcelable{
         }
     };
 
+    public NewsItem() {
+
+    }
+
     @Override
     public int describeContents() {
         return 0;
