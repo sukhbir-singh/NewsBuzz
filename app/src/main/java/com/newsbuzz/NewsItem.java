@@ -5,15 +5,16 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class NewsItem implements Parcelable{
-    public String title,link_more,pubDate,description,link_image,category;
+    public String title,link_more,pubDate,description,link_image,category,related_link;
 
-    public NewsItem(String title, String link_more, String pubDate, String description, String link_image,String category) {
+    public NewsItem(String title, String link_more, String pubDate, String description, String link_image,String category,String related_link) {
         this.title = title;
         this.link_more = link_more;
         this.pubDate = pubDate;
         this.description = description;
         this.link_image = link_image;
         this.category=category;
+        this.related_link=related_link;
     }
 
     protected NewsItem(Parcel in) {
@@ -22,6 +23,7 @@ public class NewsItem implements Parcelable{
         pubDate=in.readString();
         description=in.readString();
         link_image=in.readString();
+        related_link=in.readString();
     }
 
     public static final Creator<NewsItem> CREATOR = new Creator<NewsItem>() {
@@ -48,5 +50,6 @@ public class NewsItem implements Parcelable{
         parcel.writeString(pubDate);
         parcel.writeString(description);
         parcel.writeString(link_image);
+        parcel.writeString(related_link);
     }
 }
