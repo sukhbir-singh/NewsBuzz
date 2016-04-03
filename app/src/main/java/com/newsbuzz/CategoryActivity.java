@@ -60,6 +60,8 @@ public class CategoryActivity extends AppCompatActivity implements LoaderManager
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         loadToast = new LoadToast(this);
+
+        loadToast.setTranslationY((int) Utils.convertDpToPixel(70));
         list = new ArrayList<>();
         adapter = new CategoryAdapter(this);
         recyclerView = (RecyclerView) findViewById(R.id.list_category);
@@ -67,6 +69,7 @@ public class CategoryActivity extends AppCompatActivity implements LoaderManager
         recyclerView.setAdapter(adapter);
         if (new Connection(this).isInternet()) {
             sendRequest(getUrl(category));
+
             loadToast.show();
         }
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
@@ -81,8 +84,10 @@ public class CategoryActivity extends AppCompatActivity implements LoaderManager
                     ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(CategoryActivity.this,imageView, getString(R.string.transitionName));
 
                     startActivity(i, optionsCompat.toBundle());
+                    overridePendingTransition(R.anim.slide_out,R.anim.slide_in);
                 } else {
                     startActivity(i);
+                    overridePendingTransition(R.anim.slide_out, R.anim.slide_in);
                 }
 
             }
@@ -96,6 +101,7 @@ public class CategoryActivity extends AppCompatActivity implements LoaderManager
             @Override
             public void onResponse(String response) {
                 loadToast.success();
+
                 RssExtractor rssExtractor = new RssExtractor(response);
                 ArrayList<NewsItem> list = rssExtractor.getNewsItems();
                 for (int i = 0; i < list.size(); i++) {
