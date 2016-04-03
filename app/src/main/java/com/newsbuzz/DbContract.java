@@ -10,7 +10,6 @@ public class DbContract {
     public  static final  String TABLE_NEWS="news";
     public static final String INSERT ="insert" ;
     public static final String READ ="read" ;
-public  static final String READ_MORE="more";
     public static  class  NEWS_TABLE implements BaseColumns{
         public static final String TITLE="title";
         public static final String LINK_MORE="link_more";
@@ -19,9 +18,6 @@ public  static final String READ_MORE="more";
         public static final String LINK_IMAGE="link_image";
         public static final String CATEGORY="category";
         public static final String RELATED_LINK="relatedLinks";
-    }
-    public static Uri getMoreNews(){
-        return BASE_URI.buildUpon().appendPath(READ_MORE).build();
     }
     public static Uri getNewsByCategory(){
         return BASE_URI.buildUpon().appendPath(READ).build();

@@ -15,7 +15,6 @@ import android.util.Log;
 public class Dbprovider extends ContentProvider {
     private static final int INSERT_DATA = 1;
     private static final int READ_DATA = 2;
-    private static final int READ_MORE=3;
     private Dbhelper dbhelper;
     private SQLiteDatabase sqLiteDatabase;
     private static UriMatcher uriMatcher = uriMatcher();
@@ -24,7 +23,6 @@ public class Dbprovider extends ContentProvider {
         UriMatcher uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
         uriMatcher.addURI(DbContract.AUTHORITY, DbContract.INSERT, INSERT_DATA);
         uriMatcher.addURI(DbContract.AUTHORITY, DbContract.READ, READ_DATA);
-        uriMatcher.addURI(DbContract.AUTHORITY,DbContract.READ_MORE,READ_MORE);
         return uriMatcher;
     }
 
@@ -41,13 +39,6 @@ public class Dbprovider extends ContentProvider {
        Cursor cursor=null;
        if(uriMatcher.match(uri)==READ_DATA){
            cursor=sqLiteDatabase.query(DbContract.TABLE_NEWS,null,DbContract.NEWS_TABLE.CATEGORY+"=?",strings1,null,null,DbContract.NEWS_TABLE.PUBDATE+" desc",null);
-           if(cursor!=null){
-               cursor.setNotificationUri(getContext().getContentResolver(),uri);
-               return  cursor;
-           }
-       }
-        else if(uriMatcher.match(uri)==READ_MORE){
-           cursor=sqLiteDatabase.query(DbContract.TABLE_NEWS,null,DbContract.NEWS_TABLE.TITLE+"=?",strings1,null,null,null,null);
            if(cursor!=null){
                cursor.setNotificationUri(getContext().getContentResolver(),uri);
                return  cursor;

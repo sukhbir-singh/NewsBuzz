@@ -73,7 +73,8 @@ public class CategoryActivity extends AppCompatActivity implements LoaderManager
             @Override
             public void onItemClick(View view, int position) {
                 Intent i = new Intent(CategoryActivity.this, MoreActivity.class);
-                i.putExtra(TITLE_READ_MORE, list.get(position).title);
+                i.putExtra(TITLE_READ_MORE, list.get(position).category);
+                i.putExtra("int", position);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     ImageView imageView= (ImageView) view.findViewById(R.id.image_item_category);
                     imageView.setTransitionName(getString(R.string.transitionName));
@@ -132,7 +133,7 @@ public class CategoryActivity extends AppCompatActivity implements LoaderManager
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 do {
-                    list.add(new NewsItem(cursor.getString(cursor.getColumnIndex(DbContract.NEWS_TABLE.TITLE)), cursor.getString(cursor.getColumnIndex(DbContract.NEWS_TABLE.LINK_IMAGE))));
+                    list.add(new NewsItem(cursor.getString(cursor.getColumnIndex(DbContract.NEWS_TABLE.TITLE)), cursor.getString(cursor.getColumnIndex(DbContract.NEWS_TABLE.LINK_IMAGE)),cursor.getString(cursor.getColumnIndex(DbContract.NEWS_TABLE.CATEGORY))));
 
                 }
                 while (cursor.moveToNext());
