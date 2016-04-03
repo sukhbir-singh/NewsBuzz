@@ -5,6 +5,8 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <string name="topic">TOPICS</string>
+    <string name="next_button">NEXT BUTTON</string>
     <string name="title_activity_category">CategoryActivity</string>
     <string name="transitionName">transition</string>
 </resources>
