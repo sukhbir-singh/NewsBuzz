@@ -13,6 +13,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
+import org.unbescape.html.HtmlEscape;
+
 import java.util.ArrayList;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.viewHolder> {
@@ -36,7 +38,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.viewHo
     @Override
     public void onBindViewHolder(viewHolder holder, int position) {
 if(!list.get(position).title.isEmpty()&&list.get(position).title.length()!=0){
-    holder.textView.setText(list.get(position).title);
+    holder.textView.setText(HtmlEscape.unescapeHtml(list.get(position).title));
 }
         if(!list.get(position).link_image.isEmpty()&&list.get(position).link_image.length()!=0){
             Glide.with(context).load(list.get(position).link_image).diskCacheStrategy(DiskCacheStrategy.SOURCE).error(R.drawable.ic_error).into(holder.imageView);

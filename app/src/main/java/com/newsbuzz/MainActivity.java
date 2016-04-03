@@ -36,16 +36,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         pref = getSharedPreferences(Preferences.PREF_NAME, 0);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
         recyclerView =(RecyclerView)findViewById(R.id.staggered_recycler);
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -79,7 +72,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             list.add(new ItemStaggered("Health",R.drawable.drawer_new));
         }
 
-        //recyclerView.setHasFixedSize(true);
 
         staggeredGridLayoutManager = new StaggeredGridLayoutManager(3, 1);
         recyclerView.setLayoutManager(staggeredGridLayoutManager);
