@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -104,10 +105,7 @@ public class CategoryActivity extends AppCompatActivity implements LoaderManager
                     pubdate=list.get(i).pubDate;
 
                 }
-                if(checkdata(pubdate)){
-                getLoaderManager().restartLoader(READ_CATEGORY, null,CategoryActivity.this);
-                    addData(pubdate);
-                }
+                getLoaderManager().restartLoader(READ_CATEGORY,null,CategoryActivity.this);
 
             }
         }, new Response.ErrorListener() {
@@ -129,15 +127,24 @@ public class CategoryActivity extends AppCompatActivity implements LoaderManager
 
     @Override
     public void onLoadFinished(android.content.Loader<Cursor> loader, Cursor cursor) {
+       int Oldsize=list.size();
+        ArrayList<NewsItem> arrayList=new ArrayList<>();
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 do {
-                    list.add(new NewsItem(cursor.getString(cursor.getColumnIndex(DbContract.NEWS_TABLE.TITLE)), cursor.getString(cursor.getColumnIndex(DbContract.NEWS_TABLE.LINK_IMAGE)),cursor.getString(cursor.getColumnIndex(DbContract.NEWS_TABLE.CATEGORY))));
+                    arrayList.add(new NewsItem(cursor.getString(cursor.getColumnIndex(DbContract.NEWS_TABLE.TITLE)), cursor.getString(cursor.getColumnIndex(DbContract.NEWS_TABLE.LINK_IMAGE)),cursor.getString(cursor.getColumnIndex(DbContract.NEWS_TABLE.CATEGORY))));
 
                 }
                 while (cursor.moveToNext());
             }
-            adapter.refresh(list);
+          int newsize=arrayList.size();
+            Log.d("Old",""+Oldsize);
+            Log.d("New",""+newsize);
+            if(newsize>Oldsize){
+                list=arrayList;
+                adapter.refresh(list);
+            }
+
         }
     }
 
@@ -162,19 +169,5 @@ public class CategoryActivity extends AppCompatActivity implements LoaderManager
                 return "https://news.google.co.in/news?cf=all&hl=en&pz=1&ned=in&topic=m&output=rss";
         }
         return "";
-    }
-
-    public void addData(String data){
-        SharedPreferences sharedPreferences=getSharedPreferences(PREF_NAME, 0);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(PUB_DATE,data);
-        editor.commit();
-    }
-    public boolean checkdata(String data){
-        SharedPreferences sharedPreferences=getSharedPreferences(PREF_NAME, 0);
-        String check=sharedPreferences.getString(PUB_DATE,"");
-            if(!check.equals(data))
-                return true;
-        return false;
     }
 }
