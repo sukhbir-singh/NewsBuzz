@@ -35,14 +35,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
 
         pref = getSharedPreferences(Preferences.PREF_NAME, 0);
-
+        findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this,EnterActivity.class));
+            }
+        });
 
         recyclerView =(RecyclerView)findViewById(R.id.staggered_recycler);
 
 
         list=new ArrayList<>();
-        list.add(new ItemStaggered("Top Stories",R.drawable.topstories));
 
+        list.add(new ItemStaggered("Top Stories",R.drawable.topstories));
+        list.add(new ItemStaggered("Uploaded Stories",R.drawable.drawer_new));
         if(pref.getBoolean(Preferences.KEY_USER_ID1,true)){
             list.add(new ItemStaggered("Entertainment",R.drawable.entertainment));
         }
@@ -72,9 +78,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Intent i = new Intent(MainActivity.this, CategoryActivity.class);
-                i.putExtra(CATEGORY_NAME, list.get(position).getTitle());
-                startActivity(i);
+             if(position==1){
+                 Intent i = new Intent(MainActivity.this, UploadActivity.class);
+                 startActivity(i);
+             }
+                else {
+                 Intent i = new Intent(MainActivity.this, CategoryActivity.class);
+                 i.putExtra(CATEGORY_NAME, list.get(position).getTitle());
+                 startActivity(i);
+             }
             }
         }));
     }
