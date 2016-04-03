@@ -21,6 +21,7 @@ public class Preferences extends AppCompatActivity {
     public static final String KEY_USER_ID3 = "business";
     public static final String KEY_USER_ID4 = "sports";
     public static final String KEY_USER_ID5 = "health";
+    public static final String KEY_SHOW_AT_START = "show_at_start";
 
     public static final String PREF_NAME = "newsbuzz";
     private boolean is_entertainment=false,is_technology=false,is_business=false,is_sports=false,is_health=false;
@@ -34,6 +35,8 @@ public class Preferences extends AppCompatActivity {
 
         pref = getSharedPreferences(PREF_NAME, PRIVATE_MODE);
         editor = pref.edit();
+
+        editor.putBoolean(KEY_SHOW_AT_START,true);
 
         business= (CheckBox) findViewById(R.id.business_checkbox);
         sports= (CheckBox) findViewById(R.id.sports_checkbox);
@@ -85,13 +88,17 @@ public class Preferences extends AppCompatActivity {
     }
 
     public void saveAllPreferences(){
-        Log.v("saved","saved");
-     editor.putBoolean(KEY_USER_ID1, is_entertainment);
+        Log.v("saved", "saved");
+        editor.putBoolean(KEY_USER_ID1, is_entertainment);
      editor.putBoolean(KEY_USER_ID2, is_technology);
      editor.putBoolean(KEY_USER_ID3, is_business);
      editor.putBoolean(KEY_USER_ID4, is_sports);
      editor.putBoolean(KEY_USER_ID5, is_health);
+
+        editor.putBoolean(KEY_SHOW_AT_START,false);
      editor.commit();
+
+
     }
 
     public void clear() {

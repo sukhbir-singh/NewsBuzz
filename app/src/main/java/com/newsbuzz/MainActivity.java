@@ -6,11 +6,10 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.text.method.LinkMovementMethod;
 import android.view.Menu;
@@ -25,7 +24,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static final String CATEGORY_NAME ="Category" ;
     private RecyclerView recyclerView;
     private ArrayList<ItemStaggered> list;
-    StaggeredGridLayoutManager staggeredGridLayoutManager;
+    LinearLayoutManager staggeredGridLayoutManager;
     private SharedPreferences pref;
 
     @Override
@@ -41,40 +40,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         recyclerView =(RecyclerView)findViewById(R.id.staggered_recycler);
 
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
         list=new ArrayList<>();
-        list.add(new ItemStaggered("Top Stories",R.drawable.ic_launcher));
+        list.add(new ItemStaggered("Top Stories",R.drawable.topstories));
 
         if(pref.getBoolean(Preferences.KEY_USER_ID1,true)){
-            list.add(new ItemStaggered("Entertainment",R.drawable.ic_launcher));
+            list.add(new ItemStaggered("Entertainment",R.drawable.entertainment));
         }
 
         if(pref.getBoolean(Preferences.KEY_USER_ID2,true)){
-            list.add(new ItemStaggered("Technology",R.drawable.drawer_new));
+            list.add(new ItemStaggered("Technology",R.drawable.development));
         }
 
         if(pref.getBoolean(Preferences.KEY_USER_ID3,true)){
-            list.add(new ItemStaggered("Business",R.drawable.ic_launcher));
+            list.add(new ItemStaggered("Business",R.drawable.business));
         }
 
         if(pref.getBoolean(Preferences.KEY_USER_ID4,true)){
-            list.add(new ItemStaggered("Sports",R.drawable.ic_launcher));
+            list.add(new ItemStaggered("Sports",R.drawable.sports));
         }
 
         if(pref.getBoolean(Preferences.KEY_USER_ID5,true)){
-            list.add(new ItemStaggered("Health",R.drawable.drawer_new));
+            list.add(new ItemStaggered("Health",R.drawable.medical));
         }
 
 
-        staggeredGridLayoutManager = new StaggeredGridLayoutManager(3, 1);
+        staggeredGridLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(staggeredGridLayoutManager);
 
         StaggeredRecyclerViewAdapter adapter = new StaggeredRecyclerViewAdapter(MainActivity.this, list);

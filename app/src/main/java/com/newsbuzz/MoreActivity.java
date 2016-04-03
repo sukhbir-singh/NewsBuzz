@@ -38,6 +38,11 @@ private MyAdapter adapter;
         mViewPager.setId(R.id.viewPager);
         setContentView(mViewPager);
 
+       /* Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Article");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);*/
+
         list=new ArrayList<NewsItem>();
 
         Intent intent=getIntent();
