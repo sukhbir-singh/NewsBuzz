@@ -32,16 +32,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         recyclerView =(RecyclerView)findViewById(R.id.staggered_recycler);
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -54,14 +46,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         list=new ArrayList<>();
         list.add(new ItemStaggered("Top Stories",R.drawable.ic_launcher));
-        list.add(new ItemStaggered("Top Stories",R.drawable.ic_launcher));
-        list.add(new ItemStaggered("Top Stories",R.drawable.drawer_new));
-        list.add(new ItemStaggered("Top Stories",R.drawable.ic_launcher));
-        list.add(new ItemStaggered("Top Stories",R.drawable.ic_launcher));
-        list.add(new ItemStaggered("Top Stories",R.drawable.ic_launcher));
-        list.add(new ItemStaggered("Top Stories", R.drawable.ic_launcher));
-        list.add(new ItemStaggered("Top Stories", R.drawable.ic_launcher));
-
+        list.add(new ItemStaggered("Entertainment",R.drawable.ic_launcher));
+        list.add(new ItemStaggered("Technology",R.drawable.drawer_new));
+        list.add(new ItemStaggered("Business",R.drawable.ic_launcher));
+        list.add(new ItemStaggered("Sports",R.drawable.ic_launcher));
+        list.add(new ItemStaggered("Health",R.drawable.ic_launcher));
         //recyclerView.setHasFixedSize(true);
 
         staggeredGridLayoutManager = new StaggeredGridLayoutManager(3, 1);
