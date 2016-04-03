@@ -4,6 +4,7 @@ import android.app.LoaderManager;
 import android.content.ContentValues;
 import android.content.CursorLoader;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -31,6 +32,7 @@ import static com.newsbuzz.DbContract.NEWS_TABLE.TITLE;
 public class CategoryActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
     private static final int READ_CATEGORY = 1;
     private static final String TITLE_READ_MORE = "more_title";
+    private static final String PUB_DATE ="pub" ;
     private RecyclerView recyclerView;
     private CategoryAdapter adapter;
     private ArrayList<NewsItem> list;
@@ -38,6 +40,7 @@ public class CategoryActivity extends AppCompatActivity implements LoaderManager
     private Toolbar toolbar;
     private static final String CATEGORY_NAME = "Category";
     private String category;
+    public static final String PREF_NAME = "newsbuzz";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,8 +75,8 @@ public class CategoryActivity extends AppCompatActivity implements LoaderManager
                 Intent i = new Intent(CategoryActivity.this, MoreActivity.class);
                 i.putExtra(TITLE_READ_MORE, list.get(position).category);
                 i.putExtra("int", position);
-                    startActivity(i);
-                    overridePendingTransition(R.anim.slide_out, R.anim.slide_in);
+                startActivity(i);
+                // overridePendingTransition(R.anim.slide_out, R.anim.slide_in);
             }
         }));
         getLoaderManager().initLoader(READ_CATEGORY, null, this);
@@ -88,6 +91,7 @@ public class CategoryActivity extends AppCompatActivity implements LoaderManager
 
                 RssExtractor rssExtractor = new RssExtractor(response);
                 ArrayList<NewsItem> list = rssExtractor.getNewsItems();
+                String pubdate="";
                 for (int i = 0; i < list.size(); i++) {
                     ContentValues values = new ContentValues();
                     values.put(TITLE, list.get(i).title);
@@ -97,9 +101,13 @@ public class CategoryActivity extends AppCompatActivity implements LoaderManager
                     values.put(CATEGORY, list.get(i).category);
                     values.put(PUBDATE, list.get(i).pubDate);
                     getContentResolver().insert(DbContract.insertNews(), values);
+                    pubdate=list.get(i).pubDate;
 
                 }
+                if(checkdata(pubdate)){
                 getLoaderManager().restartLoader(READ_CATEGORY, null,CategoryActivity.this);
+                    addData(pubdate);
+                }
 
             }
         }, new Response.ErrorListener() {
@@ -154,5 +162,19 @@ public class CategoryActivity extends AppCompatActivity implements LoaderManager
                 return "https://news.google.co.in/news?cf=all&hl=en&pz=1&ned=in&topic=m&output=rss";
         }
         return "";
+    }
+
+    public void addData(String data){
+        SharedPreferences sharedPreferences=getSharedPreferences(PREF_NAME, 0);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(PUB_DATE,data);
+        editor.commit();
+    }
+    public boolean checkdata(String data){
+        SharedPreferences sharedPreferences=getSharedPreferences(PREF_NAME, 0);
+        String check=sharedPreferences.getString(PUB_DATE,"");
+            if(!check.equals(data))
+                return true;
+        return false;
     }
 }
