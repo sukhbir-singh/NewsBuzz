@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
+        <LinearLayout
+            android:layout_marginTop="65dp"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="5dp"
+                android:textSize="20sp"
+                android:text="Edit Your Preferences"/>
+            <CheckBox
+
+                android:layout_gravity="left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Entertainment"
+                android:id="@+id/entertainment_checkbox"
+                android:textSize="16sp"
+                android:layout_marginLeft="10dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:checked="false" />
+
+            <CheckBox
+                android:layout_gravity="left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Technology"
+                android:id="@+id/technology_checkbox"
+                android:textSize="16sp"
+                android:layout_marginLeft="10dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:checked="false" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Business"
+                android:id="@+id/business_checkbox"
+                android:layout_gravity="left"
+                android:textSize="16sp"
+                android:layout_marginLeft="10dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:checked="false"  />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sports"
+                android:id="@+id/sports_checkbox"
+                android:layout_gravity="left"
+                android:textSize="16sp"
+                android:layout_marginLeft="10dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:checked="false" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Health"
+                android:id="@+id/health_checkbox"
+                android:layout_gravity="left"
+                android:textSize="16sp"
+                android:layout_marginLeft="10dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:checked="false" />
+        </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>
