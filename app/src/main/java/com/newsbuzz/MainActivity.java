@@ -7,13 +7,16 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.text.method.LinkMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -112,8 +115,36 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent i = new Intent(MainActivity.this,Settings.class);
+            startActivity(i);
             return true;
         }
+        else if (id == R.id.aboutus_menu) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(String.format("%1$s", getString(R.string.app_name)));
+            builder.setMessage(getResources().getText(R.string.aboutus_text));
+            builder.setPositiveButton("OK", null);
+            //builder.setIcon(R.mipmap.nimbus16);
+            AlertDialog welcomeAlert = builder.create();
+            welcomeAlert.show();
+            ((TextView) welcomeAlert.findViewById(android.R.id.message)).setMovementMethod(LinkMovementMethod.getInstance());
+
+            return true;
+        }
+        else if (id == R.id.openSource_licences) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(String.format("%1$s", getString(R.string.openSoure_name)));
+            builder.setMessage(getResources().getText(R.string.openSourceLicence_text));
+            builder.setPositiveButton("OK", null);
+            //builder.setIcon(R.mipmap.nimbus16);
+            AlertDialog welcomeAlert = builder.create();
+            welcomeAlert.show();
+            ((TextView) welcomeAlert.findViewById(android.R.id.message)).setMovementMethod(LinkMovementMethod.getInstance());
+
+            return true;
+        }
+
+
 
         return super.onOptionsItemSelected(item);
     }
