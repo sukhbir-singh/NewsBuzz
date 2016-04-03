@@ -1,6 +1,7 @@
 package com.newsbuzz;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -15,17 +16,22 @@ public class Splashscreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splashscreen);
 
-        new Handler().postDelayed(new Runnable() {
+        SharedPreferences pref = getSharedPreferences(Preferences.PREF_NAME, 0);
+        SharedPreferences.Editor editor = pref.edit();
+        final boolean value=pref.getBoolean(Preferences.KEY_SHOW_AT_START,true);
 
-            /*
-             * Showing splash screen with a timer. This will be useful when you
-             * want to show case your app logo / company
-             */
+        new Handler().postDelayed(new Runnable() {
 
             @Override
             public void run() {
 
-                Intent i = new Intent(Splashscreen.this, Preferences.class);
+                Intent i=null;
+                if(value==true){
+                    i= new Intent(Splashscreen.this, Preferences.class);
+                }else{
+                    i= new Intent(Splashscreen.this, MainActivity.class);
+                }
+
                 startActivity(i);
                 finish();
             }

@@ -6,7 +6,7 @@
 
     <string name="action_settings">Settings</string>
     <string name="topic">TOPICS</string>
-    <string name="next_button">NEXT BUTTON</string>
+    <string name="next_button"> NEXT </string>
     <string name="title_activity_category">Category</string>
     <string name="transitionName">transition</string>
     <string name="aboutus_text">NewsBuzz collects all the stories you want to read, from top news sources, based on topics you are most interested in.  </string>
