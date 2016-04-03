@@ -5,16 +5,12 @@ import android.content.ContentValues;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.database.Cursor;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Response;
@@ -53,8 +49,6 @@ public class CategoryActivity extends AppCompatActivity implements LoaderManager
         if (intent != null) {
             if (intent.hasExtra(CATEGORY_NAME)) {
                 category = intent.getStringExtra(CATEGORY_NAME);
-                toolbar.setTitle("asdfg");
-                Log.d("df", category);
             }
         }
 
@@ -78,18 +72,8 @@ public class CategoryActivity extends AppCompatActivity implements LoaderManager
                 Intent i = new Intent(CategoryActivity.this, MoreActivity.class);
                 i.putExtra(TITLE_READ_MORE, list.get(position).category);
                 i.putExtra("int", position);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    ImageView imageView= (ImageView) view.findViewById(R.id.image_item_category);
-                    imageView.setTransitionName(getString(R.string.transitionName));
-                    ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(CategoryActivity.this,imageView, getString(R.string.transitionName));
-
-                    startActivity(i, optionsCompat.toBundle());
-                    overridePendingTransition(R.anim.slide_out,R.anim.slide_in);
-                } else {
                     startActivity(i);
                     overridePendingTransition(R.anim.slide_out, R.anim.slide_in);
-                }
-
             }
         }));
         getLoaderManager().initLoader(READ_CATEGORY, null, this);
@@ -115,6 +99,7 @@ public class CategoryActivity extends AppCompatActivity implements LoaderManager
                     getContentResolver().insert(DbContract.insertNews(), values);
 
                 }
+                getLoaderManager().restartLoader(READ_CATEGORY, null,CategoryActivity.this);
 
             }
         }, new Response.ErrorListener() {

@@ -8,6 +8,8 @@
     tools:context="com.newsbuzz.UploadActivity"
     tools:showIn="@layout/activity_upload">
 <android.support.v7.widget.RecyclerView
+    android:layout_marginTop="7dp"
+    android:layout_marginBottom="7dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/list_upload"/>

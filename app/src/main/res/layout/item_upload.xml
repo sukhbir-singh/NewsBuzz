@@ -1,7 +1,7 @@
 <android.support.v7.widget.CardView
     card_view:cardCornerRadius="2dp"
-    card_view:cardElevation="8dp"
-    android:layout_margin="8dp"
+    card_view:cardElevation="4dp"
+    android:layout_margin="4dp"
     card_view:cardUseCompatPadding="true"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -11,13 +11,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
         <TextView
             android:padding="5dp"
             android:layout_weight="1"
-            android:textColor="@android:color/black"
-            android:textAppearance="@android:style/TextAppearance.Medium"
+            android:textColor="#505050"
+            android:textSize="16sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/title_item_upload"
@@ -26,8 +25,8 @@
         <TextView
             android:padding="5dp"
             android:layout_weight="1"
-            android:textColor="@android:color/black"
-            android:textAppearance="@android:style/TextAppearance.Medium"
+            android:textColor="#505050"
+            android:textSize="16sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/description_item_upload"

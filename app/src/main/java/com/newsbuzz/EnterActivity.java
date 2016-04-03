@@ -37,6 +37,7 @@ public class EnterActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         loadToast=new LoadToast(this);
+        loadToast.setTranslationY((int) Utils.convertDpToPixel(70));
         submit= (Button) findViewById(R.id.submit_enter);
         title = (EditText) findViewById(R.id.title_edittext);
         description = (EditText) findViewById(R.id.description_edittext);

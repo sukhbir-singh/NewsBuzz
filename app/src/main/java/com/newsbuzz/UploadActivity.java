@@ -30,6 +30,8 @@ private  UploadAdapter adapter;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload);
         loadToast=new LoadToast(this);
+        loadToast.setTranslationY((int) Utils.convertDpToPixel(70));
+
         list=new ArrayList<>();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

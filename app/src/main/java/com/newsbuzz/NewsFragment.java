@@ -13,6 +13,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
+import org.unbescape.html.HtmlEscape;
+
 /**
  * Created by sukhbir on 3/4/16.
  */
@@ -55,10 +57,9 @@ public class NewsFragment extends Fragment {
         date = (TextView)v.findViewById(R.id.pubDate_more_activity);
         description = (TextView)v.findViewById(R.id.description_more_activity);
         pic = (ImageView)v.findViewById(R.id.image_more_activity);
-
         title.setText(newsItem.title);
         date.setText(newsItem.pubDate);
-        description.setText(newsItem.description);
+        description.setText(HtmlEscape.unescapeHtml(newsItem.description));
         Glide.with(getActivity()).load(newsItem.link_image).diskCacheStrategy(DiskCacheStrategy.SOURCE).error(R.drawable.ic_error).into(pic);
 
         return v;

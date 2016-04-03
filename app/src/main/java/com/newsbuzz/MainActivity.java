@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         list=new ArrayList<>();
 
         list.add(new ItemStaggered("Top Stories",R.drawable.topstories));
-        list.add(new ItemStaggered("Uploaded Stories",R.drawable.drawer_new));
+        list.add(new ItemStaggered("Uploaded Stories",R.drawable.upload));
         if(pref.getBoolean(Preferences.KEY_USER_ID1,true)){
             list.add(new ItemStaggered("Entertainment",R.drawable.entertainment));
         }

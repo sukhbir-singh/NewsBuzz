@@ -28,5 +28,5 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         android:id="@+id/fab"
-        android:src="@android:drawable/ic_input_add"/>
+        android:src="@drawable/upload_white"/>
 </android.support.design.widget.CoordinatorLayout>
