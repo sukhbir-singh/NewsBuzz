@@ -31,7 +31,6 @@ private  UploadAdapter adapter;
         setContentView(R.layout.activity_upload);
         loadToast=new LoadToast(this);
         loadToast.setTranslationY((int) Utils.convertDpToPixel(70));
-
         list=new ArrayList<>();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -56,7 +55,7 @@ private  UploadAdapter adapter;
                 try {
                     JSONArray jsonArray=response.getJSONArray("feed");
                     for(int i=0;i<jsonArray.length();i++){
-                        String title="",description="";
+                        String title="",description="",image="";
                         JSONObject feedObject=jsonArray.getJSONObject(i);
                         if(feedObject.has("title")&&!feedObject.isNull("title")){
                             title=feedObject.getString("title");
@@ -64,7 +63,10 @@ private  UploadAdapter adapter;
                         if(feedObject.has("description")&&!feedObject.isNull("description")){
                             description=feedObject.getString("description");
                         }
-                  list.add(new Upload_item(title,description));
+                        if(feedObject.has("image")&&!feedObject.isNull("image")){
+                            image=feedObject.getString("image");
+                        }
+                  list.add(new Upload_item(title,description,image));
                     }
                     adapter.refresh(list);
                 } catch (JSONException e) {
@@ -83,6 +85,6 @@ private  UploadAdapter adapter;
         MySingleton.getInstance(UploadActivity.this).addToRequestQueue(jsonObjectRequest);
     }
 private String getUrl(){
-    return "http://www.newsbuzz.16mb.com/ShowAllJson.php";
+    return "http://www.newsbuzz.890m.com/ShowAllJson.php";
 }
 }

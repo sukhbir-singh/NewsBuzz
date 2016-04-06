@@ -1,14 +1,23 @@
 package com.newsbuzz;
 
+import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -20,15 +29,19 @@ import com.android.volley.toolbox.StringRequest;
 
 import net.steamcrafted.loadtoast.LoadToast;
 
+import java.io.ByteArrayOutputStream;
 import java.util.Hashtable;
 import java.util.Map;
 
 public class EnterActivity extends AppCompatActivity {
+    private static final int PICK_IMAGE_REQUEST = 1;
     private EditText title, description;
     private TextInputLayout titleTextInputLayout, descriptionTextInputLayout;
     private boolean isTitle, isDescription;
     private Button submit;
     private LoadToast loadToast;
+    private String encodedString;
+    private ImageButton imageView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +51,7 @@ public class EnterActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         loadToast=new LoadToast(this);
         loadToast.setTranslationY((int) Utils.convertDpToPixel(70));
+        imageView= (ImageButton) findViewById(R.id.imageView);
         submit= (Button) findViewById(R.id.submit_enter);
         title = (EditText) findViewById(R.id.title_edittext);
         description = (EditText) findViewById(R.id.description_edittext);
@@ -89,6 +103,12 @@ public class EnterActivity extends AppCompatActivity {
                 }
             }
         });
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                createchooser();
+            }
+        });
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -130,6 +150,7 @@ private  void sendRequest(final String title, final String description){
             Map<String,String> hMap=new Hashtable<>();
            hMap.put("title",title);
             hMap.put("description",description);
+            hMap.put("image",encodedString);
             return hMap;
         }
     };
@@ -138,6 +159,37 @@ private  void sendRequest(final String title, final String description){
 }
 
     private String getUrl() {
-        return "http://www.newsbuzz.16mb.com/mobileupload.php";
+        return "http://www.newsbuzz.890m.com/mobileupload.php";
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            Uri filePath = data.getData();
+            String[] filePathColumn = {MediaStore.Images.Media.DATA};
+            Cursor c = getContentResolver().query(filePath, filePathColumn, null, null, null);
+            c.moveToFirst();
+            String imgDecodableString = c.getString(c.getColumnIndex(filePathColumn[0]));
+            c.close();
+            Bitmap bitmap = BitmapFactory.decodeFile(imgDecodableString);
+            imageView.setImageBitmap(bitmap);
+            encodedString=decodeImage(bitmap);
+        }
+    }
+
+    private String decodeImage(Bitmap bitmap) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageBytes = baos.toByteArray();
+        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        Log.d("DECODE IMAGE",encodedImage);
+        return encodedImage;
+    }
+
+    private void createchooser(){
+        Intent intent=new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        intent.setType("image/*");
+        startActivityForResult(Intent.createChooser(intent, "CHOOSE PHOTO"), PICK_IMAGE_REQUEST);
     }
 }
