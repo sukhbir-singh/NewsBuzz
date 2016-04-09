@@ -145,6 +145,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             return true;
         }
+        else if(id==R.id.search_news){
+            startActivity(new Intent(MainActivity.this,SearchActivity.class));
+            return  true;
+        }
 
 
 

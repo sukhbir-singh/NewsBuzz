@@ -14,4 +14,5 @@
     <string name="openSourceLicence_text">Volley\n\n Load-toast\n\n Glide\n\n Jsoup\n\n Unbescape  </string>
     <string name="title_activity_upload">UploadActivity</string>
     <string name="title_activity_enter">Upload The News</string>
+    <string name="title_activity_search">SearchActivity</string>
 </resources>

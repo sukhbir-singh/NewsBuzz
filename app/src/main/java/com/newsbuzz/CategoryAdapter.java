@@ -3,6 +3,7 @@ package com.newsbuzz;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.viewHo
 
     public  void  refresh(ArrayList<NewsItem> list){
         this.list=list;
+        Log.d("list",""+list.size());
         notifyItemRangeChanged(0,list.size());
     }
     @Override
