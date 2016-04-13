@@ -42,9 +42,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.viewHo
 if(!list.get(position).title.isEmpty()&&list.get(position).title.length()!=0){
     holder.textView.setText(HtmlEscape.unescapeHtml(list.get(position).title));
 }
+if(list.get(position).link_image!=null)
         if(!list.get(position).link_image.isEmpty()&&list.get(position).link_image.length()!=0){
             Glide.with(context).load(list.get(position).link_image).diskCacheStrategy(DiskCacheStrategy.SOURCE).error(R.drawable.ic_error).into(holder.imageView);
         }
+        if(list.get(position).pubDate!=null)
+            if(!list.get(position).pubDate.isEmpty()&&list.get(position).pubDate.length()!=0){
+                holder.timestamptextView.setText(Utils.getTime(Integer.parseInt(list.get(position).pubDate)));
+            }
     }
 
     @Override
@@ -54,9 +59,10 @@ if(!list.get(position).title.isEmpty()&&list.get(position).title.length()!=0){
 
     public static class viewHolder extends RecyclerView.ViewHolder{
         ImageView imageView;
-        TextView textView;
+        TextView textView,timestamptextView;
         public viewHolder(View itemView) {
             super(itemView);
+            timestamptextView= (TextView) itemView.findViewById(R.id.timestamp_item_category);
             imageView= (ImageView) itemView.findViewById(R.id.image_item_category);
             textView= (TextView) itemView.findViewById(R.id.title_item_category);
             imageView.setLayoutParams(new LinearLayout.LayoutParams((int) Utils.convertDpToPixel(100f),(int) Utils.convertDpToPixel(100f)));

@@ -17,8 +17,8 @@ import static com.newsbuzz.DbContract.TABLE_NEWS;
 
 public class Dbhelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "News";
-    private static final int DATABASE_VERSION = 7;
-    private final String CREATE_TABLE = "create table " + TABLE_NEWS + "( " + _ID + " integer auto_increment primary key , " + TITLE + " text not null Unique, " + LINK_MORE + " text Unique," + PUBDATE + " text not null Unique ," + DESCRIPTION + " text not null Unique," + CATEGORY + " text not null," + LINK_IMAGE + " text not null Unique," + RELATED_LINK + " text Unique);";
+    private static final int DATABASE_VERSION = 10;
+    private final String CREATE_TABLE = "create table " + TABLE_NEWS + "( " + _ID + " integer auto_increment primary key , " + TITLE + " text not null Unique, " + LINK_MORE + " text Unique," + PUBDATE + " integer not null," + DESCRIPTION + " text not null Unique," + CATEGORY + " text not null," + LINK_IMAGE + " text not null Unique," + RELATED_LINK + " text Unique);";
 
     public Dbhelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

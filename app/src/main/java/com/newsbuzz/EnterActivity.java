@@ -3,7 +3,6 @@ package com.newsbuzz;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -26,6 +25,9 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 
 import net.steamcrafted.loadtoast.LoadToast;
 
@@ -172,9 +174,14 @@ private  void sendRequest(final String title, final String description){
             c.moveToFirst();
             String imgDecodableString = c.getString(c.getColumnIndex(filePathColumn[0]));
             c.close();
-            Bitmap bitmap = BitmapFactory.decodeFile(imgDecodableString);
-            imageView.setImageBitmap(bitmap);
-            encodedString=decodeImage(bitmap);
+            Glide.with(this).load(imgDecodableString).asBitmap().into(new SimpleTarget<Bitmap>() {
+                @Override
+                public void onResourceReady(Bitmap bitmap, GlideAnimation<? super Bitmap> glideAnimation) {
+                  imageView.setImageBitmap(bitmap);
+                    encodedString=decodeImage(bitmap);
+                }
+            });
+
         }
     }
 

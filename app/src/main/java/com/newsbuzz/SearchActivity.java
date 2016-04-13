@@ -35,6 +35,8 @@ private SearchView searchView;
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         searchView= (SearchView) findViewById(R.id.search_news);
+        searchView.setIconified(false);
+        searchView.setQueryHint("Search News");
         recyclerView= (RecyclerView) findViewById(R.id.list_category);
         adapter=new CategoryAdapter(this);
         recyclerView.setAdapter(adapter);
