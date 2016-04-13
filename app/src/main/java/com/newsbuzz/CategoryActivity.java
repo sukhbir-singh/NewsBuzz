@@ -4,7 +4,6 @@ import android.app.LoaderManager;
 import android.content.ContentValues;
 import android.content.CursorLoader;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -92,7 +91,6 @@ public class CategoryActivity extends AppCompatActivity implements LoaderManager
 
                 RssExtractor rssExtractor = new RssExtractor(response);
                 ArrayList<NewsItem> list = rssExtractor.getNewsItems();
-                String pubdate="";
                 for (int i = 0; i < list.size(); i++) {
                     ContentValues values = new ContentValues();
                     values.put(TITLE, list.get(i).title);
@@ -100,10 +98,8 @@ public class CategoryActivity extends AppCompatActivity implements LoaderManager
                     values.put(LINK_IMAGE, list.get(i).link_image);
                     values.put(DESCRIPTION, list.get(i).description);
                     values.put(CATEGORY, list.get(i).category);
-                    values.put(PUBDATE, list.get(i).pubDate);
+                    values.put(PUBDATE,Utils.getTimestamp(list.get(i).pubDate));
                     getContentResolver().insert(DbContract.insertNews(), values);
-                    pubdate=list.get(i).pubDate;
-
                 }
                 getLoaderManager().restartLoader(READ_CATEGORY,null,CategoryActivity.this);
 
@@ -132,7 +128,7 @@ public class CategoryActivity extends AppCompatActivity implements LoaderManager
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 do {
-                    arrayList.add(new NewsItem(cursor.getString(cursor.getColumnIndex(DbContract.NEWS_TABLE.TITLE)), cursor.getString(cursor.getColumnIndex(DbContract.NEWS_TABLE.LINK_IMAGE)),cursor.getString(cursor.getColumnIndex(DbContract.NEWS_TABLE.CATEGORY))));
+                    arrayList.add(new NewsItem(cursor.getString(cursor.getColumnIndex(DbContract.NEWS_TABLE.TITLE)), cursor.getString(cursor.getColumnIndex(DbContract.NEWS_TABLE.LINK_IMAGE)),cursor.getString(cursor.getColumnIndex(DbContract.NEWS_TABLE.CATEGORY)),""+cursor.getInt(cursor.getColumnIndex(DbContract.NEWS_TABLE.PUBDATE))));
 
                 }
                 while (cursor.moveToNext());

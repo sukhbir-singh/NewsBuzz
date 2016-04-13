@@ -38,7 +38,7 @@ public class Dbprovider extends ContentProvider {
       sqLiteDatabase=dbhelper.getReadableDatabase();
        Cursor cursor=null;
        if(uriMatcher.match(uri)==READ_DATA){
-           cursor=sqLiteDatabase.query(DbContract.TABLE_NEWS,null,DbContract.NEWS_TABLE.CATEGORY+"=?",strings1,null,null,DbContract.NEWS_TABLE.PUBDATE+" desc",null);
+           cursor=sqLiteDatabase.query(DbContract.TABLE_NEWS,null,DbContract.NEWS_TABLE.CATEGORY+"=?",strings1,null,null,DbContract.NEWS_TABLE.PUBDATE,null);
            if(cursor!=null){
                cursor.setNotificationUri(getContext().getContentResolver(),uri);
                return  cursor;
