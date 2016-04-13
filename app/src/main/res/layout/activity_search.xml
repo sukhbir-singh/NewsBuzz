@@ -17,7 +17,7 @@
                 android:id="@+id/search_news"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:queryHint="Search News" />
+                android:imeOptions="actionSearch"/>
         </android.support.v7.widget.Toolbar>
 
     </LinearLayout>

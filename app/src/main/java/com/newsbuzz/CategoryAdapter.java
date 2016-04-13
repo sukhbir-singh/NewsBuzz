@@ -42,6 +42,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.viewHo
 if(!list.get(position).title.isEmpty()&&list.get(position).title.length()!=0){
     holder.textView.setText(HtmlEscape.unescapeHtml(list.get(position).title));
 }
+if(list.get(position).link_image!=null)
         if(!list.get(position).link_image.isEmpty()&&list.get(position).link_image.length()!=0){
             Glide.with(context).load(list.get(position).link_image).diskCacheStrategy(DiskCacheStrategy.SOURCE).error(R.drawable.ic_error).into(holder.imageView);
         }

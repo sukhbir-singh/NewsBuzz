@@ -21,7 +21,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class UploadActivity extends AppCompatActivity {
-private RecyclerView recyclerView;
+    private static final String LIST ="list" ;
+    private RecyclerView recyclerView;
 private  UploadAdapter adapter;
     private LoadToast loadToast;
     private ArrayList<Upload_item> list;
@@ -39,13 +40,20 @@ private  UploadAdapter adapter;
         adapter=new UploadAdapter();
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        if(new Connection(this).isInternet()){
-            loadToast.show();
-            sendRequest(getUrl());
+        if(savedInstanceState!=null){
+            list=savedInstanceState.getParcelableArrayList(LIST);
+            adapter.refresh(list);
         }
         else {
-            Toast.makeText(this,"No Internet Connection",Toast.LENGTH_LONG).show();
+            if(new Connection(this).isInternet()){
+                loadToast.show();
+                sendRequest(getUrl());
+            }
+            else {
+                Toast.makeText(this,"No Internet Connection",Toast.LENGTH_LONG).show();
+            }
         }
+
 
     }
     private void sendRequest(String url){
@@ -87,4 +95,10 @@ private  UploadAdapter adapter;
 private String getUrl(){
     return "http://www.newsbuzz.890m.com/ShowAllJson.php";
 }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList(LIST,list);
+    }
 }
