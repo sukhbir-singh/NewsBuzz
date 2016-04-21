@@ -35,9 +35,10 @@ private  UploadAdapter adapter;
         list=new ArrayList<>();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Uploaded News");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         recyclerView= (RecyclerView) findViewById(R.id.list_upload);
-        adapter=new UploadAdapter();
+        adapter=new UploadAdapter(this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         if(savedInstanceState!=null){

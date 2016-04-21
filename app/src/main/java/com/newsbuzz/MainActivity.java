@@ -30,7 +30,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        toolbar.setTitle("NewsBuzz");
+        toolbar.setLogo(R.mipmap.ic_launcher);
         pref = getSharedPreferences(Preferences.PREF_NAME, 0);
         findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
             @Override

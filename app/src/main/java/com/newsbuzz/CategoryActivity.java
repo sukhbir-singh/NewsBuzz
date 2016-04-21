@@ -45,18 +45,17 @@ public class CategoryActivity extends AppCompatActivity implements LoaderManager
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbarCategory);
         setSupportActionBar(toolbar);
         Intent intent = getIntent();
         if (intent != null) {
             if (intent.hasExtra(CATEGORY_NAME)) {
                 category = intent.getStringExtra(CATEGORY_NAME);
+                getSupportActionBar().setTitle(category);
             }
         }
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         loadToast = new LoadToast(this);
-
         loadToast.setTranslationY((int) Utils.convertDpToPixel(70));
         list = new ArrayList<>();
         adapter = new CategoryAdapter(this,true);
@@ -65,7 +64,6 @@ public class CategoryActivity extends AppCompatActivity implements LoaderManager
         recyclerView.setAdapter(adapter);
         if (new Connection(this).isInternet()) {
             sendRequest(getUrl(category));
-
             loadToast.show();
         }
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
