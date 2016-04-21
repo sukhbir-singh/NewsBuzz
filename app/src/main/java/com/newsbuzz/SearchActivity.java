@@ -38,7 +38,7 @@ private SearchView searchView;
         searchView.setIconified(false);
         searchView.setQueryHint("Search News");
         recyclerView= (RecyclerView) findViewById(R.id.list_category);
-        adapter=new CategoryAdapter(this);
+        adapter=new CategoryAdapter(this,false);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -67,7 +67,6 @@ private SearchView searchView;
                 loadToast.success();
                 RssExtractor rssExtractor = new RssExtractor(response);
                 ArrayList<NewsItem> list = rssExtractor.getNewsItems();
-                Log.d("title",""+list.get(0).title);
                 if(list.size()>0){
                     adapter.refresh(list);
                 }

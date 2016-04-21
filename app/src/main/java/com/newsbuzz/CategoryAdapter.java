@@ -21,8 +21,9 @@ import java.util.ArrayList;
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.viewHolder> {
     private ArrayList<NewsItem> list=new ArrayList<>();
     private Context context;
-
-    public CategoryAdapter(Context context) {
+private boolean show;
+    public CategoryAdapter(Context context,boolean show) {
+        this.show=show;
         this.context = context;
     }
 
@@ -46,10 +47,15 @@ if(list.get(position).link_image!=null)
         if(!list.get(position).link_image.isEmpty()&&list.get(position).link_image.length()!=0){
             Glide.with(context).load(list.get(position).link_image).diskCacheStrategy(DiskCacheStrategy.SOURCE).error(R.drawable.ic_error).into(holder.imageView);
         }
-        if(list.get(position).pubDate!=null)
-            if(!list.get(position).pubDate.isEmpty()&&list.get(position).pubDate.length()!=0){
-                holder.timestamptextView.setText(Utils.getTime(Integer.parseInt(list.get(position).pubDate)));
-            }
+        if(show) {
+            if (list.get(position).pubDate != null)
+                if (!list.get(position).pubDate.isEmpty() && list.get(position).pubDate.length() != 0) {
+                    holder.timestamptextView.setText(Utils.getTimestamp(list.get(position).pubDate + " GMT"));
+                }
+        }
+        else {
+            holder.timestamptextView.setVisibility(View.GONE);
+        }
     }
 
     @Override
