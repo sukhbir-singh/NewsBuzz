@@ -44,7 +44,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.newsbuzz.MainActivity" />
         </activity>
-        <activity android:name=".MoreActivity" />
+        <activity android:name=".MoreActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".UploadActivity"
             android:parentActivityName=".MainActivity"
