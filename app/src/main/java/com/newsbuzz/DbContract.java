@@ -13,7 +13,7 @@ public class DbContract {
     public static  class  NEWS_TABLE implements BaseColumns{
         public static final String TITLE="title";
         public static final String LINK_MORE="link_more";
-        public static final String PUBDATE="pubdate";
+        public static final String PUBDATE="created_on";
         public static final String DESCRIPTION="description";
         public static final String LINK_IMAGE="link_image";
         public static final String CATEGORY="category";

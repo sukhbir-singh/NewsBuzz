@@ -50,6 +50,7 @@ public class EnterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_enter);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Upload The News");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         loadToast=new LoadToast(this);
         loadToast.setTranslationY((int) Utils.convertDpToPixel(70));

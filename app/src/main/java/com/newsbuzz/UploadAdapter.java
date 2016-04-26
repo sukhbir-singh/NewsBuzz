@@ -1,7 +1,7 @@
 package com.newsbuzz;
 
 
-import android.graphics.BitmapFactory;
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
 import android.view.LayoutInflater;
@@ -10,10 +10,18 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 public class UploadAdapter extends RecyclerView.Adapter<UploadAdapter.viewHolder> {
- private ArrayList<Upload_item> list=new ArrayList<>();
+    private Context context;
+
+    public UploadAdapter(Context context) {
+        this.context = context;
+    }
+
+    private ArrayList<Upload_item> list=new ArrayList<>();
     public  void refresh(ArrayList<Upload_item> list){
         this.list=list;
         notifyItemRangeChanged(0,list.size());
@@ -35,7 +43,7 @@ if(!list.get(position).title.isEmpty()&&list.get(position).title.length()!=0){
         }
         if(!list.get(position).image.isEmpty()&&list.get(position).image.length()!=0){
             byte decoded[]= Base64.decode(list.get(position).image,Base64.DEFAULT);
-            holder.imageView.setImageBitmap(BitmapFactory.decodeByteArray(decoded,0,decoded.length));
+            Glide.with(context).load(decoded).asBitmap().error(R.drawable.business).into(holder.imageView);
         }
         else {
             holder.imageView.setVisibility(View.GONE);

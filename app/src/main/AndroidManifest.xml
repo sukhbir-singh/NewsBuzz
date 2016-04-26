@@ -10,24 +10,19 @@
         android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/small_logo"
-        android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Preferences"
-            android:label="Preferences"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Settings"
-            android:label="@string/action_settings"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Splashscreen"
-            android:label="NewsBuzz"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -43,37 +38,34 @@
 
         <activity
             android:name=".CategoryActivity"
-            android:label="@string/title_activity_category"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.newsbuzz.MainActivity" />
         </activity>
-        <activity android:name=".MoreActivity" />
+        <activity android:name=".MoreActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".UploadActivity"
-            android:label="@string/title_activity_upload"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.newsbuzz.MainActivity" />
         </activity>
         <activity
             android:name=".EnterActivity"
-            android:label="@string/title_activity_enter"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.newsbuzz.MainActivity" />
         </activity>
         <activity
             android:name=".SearchActivity"
-            android:label="@string/title_activity_search"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.newsbuzz.MainActivity" />

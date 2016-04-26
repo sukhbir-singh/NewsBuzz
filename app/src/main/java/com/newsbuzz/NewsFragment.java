@@ -58,7 +58,7 @@ public class NewsFragment extends Fragment {
         description = (TextView)v.findViewById(R.id.description_more_activity);
         pic = (ImageView)v.findViewById(R.id.image_more_activity);
         title.setText(HtmlEscape.unescapeHtml(newsItem.title));
-        date.setText(Utils.getTime(Integer.parseInt(newsItem.pubDate)));
+        date.setText(Utils.getTimestamp(newsItem.pubDate+" GMT"));
         description.setText(HtmlEscape.unescapeHtml(newsItem.description));
         Glide.with(getActivity()).load(newsItem.link_image).diskCacheStrategy(DiskCacheStrategy.SOURCE).error(R.drawable.ic_error).into(pic);
 

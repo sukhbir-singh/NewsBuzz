@@ -26,7 +26,6 @@ import static com.newsbuzz.DbContract.NEWS_TABLE.CATEGORY;
 import static com.newsbuzz.DbContract.NEWS_TABLE.DESCRIPTION;
 import static com.newsbuzz.DbContract.NEWS_TABLE.LINK_IMAGE;
 import static com.newsbuzz.DbContract.NEWS_TABLE.LINK_MORE;
-import static com.newsbuzz.DbContract.NEWS_TABLE.PUBDATE;
 import static com.newsbuzz.DbContract.NEWS_TABLE.TITLE;
 
 public class CategoryActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -46,27 +45,25 @@ public class CategoryActivity extends AppCompatActivity implements LoaderManager
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbarCategory);
         setSupportActionBar(toolbar);
         Intent intent = getIntent();
         if (intent != null) {
             if (intent.hasExtra(CATEGORY_NAME)) {
                 category = intent.getStringExtra(CATEGORY_NAME);
+                getSupportActionBar().setTitle(category);
             }
         }
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         loadToast = new LoadToast(this);
-
         loadToast.setTranslationY((int) Utils.convertDpToPixel(70));
         list = new ArrayList<>();
-        adapter = new CategoryAdapter(this);
+        adapter = new CategoryAdapter(this,true);
         recyclerView = (RecyclerView) findViewById(R.id.list_category);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
         if (new Connection(this).isInternet()) {
             sendRequest(getUrl(category));
-
             loadToast.show();
         }
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
@@ -98,7 +95,6 @@ public class CategoryActivity extends AppCompatActivity implements LoaderManager
                     values.put(LINK_IMAGE, list.get(i).link_image);
                     values.put(DESCRIPTION, list.get(i).description);
                     values.put(CATEGORY, list.get(i).category);
-                    values.put(PUBDATE,Utils.getTimestamp(list.get(i).pubDate));
                     getContentResolver().insert(DbContract.insertNews(), values);
                 }
                 getLoaderManager().restartLoader(READ_CATEGORY,null,CategoryActivity.this);
@@ -128,7 +124,7 @@ public class CategoryActivity extends AppCompatActivity implements LoaderManager
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 do {
-                    arrayList.add(new NewsItem(cursor.getString(cursor.getColumnIndex(DbContract.NEWS_TABLE.TITLE)), cursor.getString(cursor.getColumnIndex(DbContract.NEWS_TABLE.LINK_IMAGE)),cursor.getString(cursor.getColumnIndex(DbContract.NEWS_TABLE.CATEGORY)),""+cursor.getInt(cursor.getColumnIndex(DbContract.NEWS_TABLE.PUBDATE))));
+                    arrayList.add(new NewsItem(cursor.getString(cursor.getColumnIndex(DbContract.NEWS_TABLE.TITLE)), cursor.getString(cursor.getColumnIndex(DbContract.NEWS_TABLE.LINK_IMAGE)),cursor.getString(cursor.getColumnIndex(DbContract.NEWS_TABLE.CATEGORY)),cursor.getString(cursor.getColumnIndex(DbContract.NEWS_TABLE.PUBDATE))));
 
                 }
                 while (cursor.moveToNext());
