@@ -30,7 +30,7 @@ public class NewsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         newsItem = (NewsItem)getArguments().getSerializable(EXTRA_NEWS_ID);
-         setHasOptionsMenu(true);    // turn on menu handling
+        // turn on menu handling
     }
 
     public static NewsFragment newInstance(NewsItem item) {
@@ -44,15 +44,6 @@ public class NewsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_more, parent, false);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            if (NavUtils.getParentActivityName(getActivity()) != null) {
-
-                if(getActivity().getActionBar()!=null)
-                    getActivity().getActionBar().setDisplayHomeAsUpEnabled(true); //for back button with icon
-            }
-        }
-
         title = (TextView)v.findViewById(R.id.title_more_activity);
         date = (TextView)v.findViewById(R.id.pubDate_more_activity);
         description = (TextView)v.findViewById(R.id.description_more_activity);

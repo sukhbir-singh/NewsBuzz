@@ -60,8 +60,6 @@ private MyAdapter adapter;
         }
 
         getSupportLoaderManager().initLoader(MORE_READ,null,this);
-
-        FragmentManager fm = getSupportFragmentManager();
         adapter=new MyAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(adapter);
 
